@@ -1,18 +1,21 @@
+const expect  = require('chai').expect;
 const assert = require('assert');
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let server = require('../src/server');
 let should = chai.should();
-//module.exports = server.listen(3000);
 chai.use(chaiHttp);
 
-it("Capital should be Washington, D.C.", (done) => {
+describe('Test Capitals of Country with Country code', function () {
+it("Capital should be New Delhi", (done) => {
        chai.request('http://localhost:3000')
             .post("/")
+            .set('content-type', 'application/x-www-form-urlencoded')
             .send({code: "IN"})
-            .end((err, res) => {
+            .end((err, res, body) => {
                 res.should.have.status(200);
-                console.log("Response Body:", res.body);
+                console.log("Response Body:", res);
             })
     done()
 })
+});
